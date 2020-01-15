@@ -1,20 +1,28 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 #define LINE_SIZE 1024
 #define TOKEN_SIZE 64
 #define TOKEN_DELIM " \n"
 
 char* readLine(void);
-//char** parse(char* line);
+char** parseLine(char* line);
 
 
 int main(){
-    char *input = readLine();
-    printf("You just printed %s", input);
+    // char *input = readLine();
+    // printf("You just printed %s", input);
 
-    // char* line = "My name is Mridul";
-    // char** tokens = parse(line);
+    char* line = readLine();
+    char** tokens = parseLine(line);
+    int i = 0;
+   
+    while(tokens[i] != NULL){
+        
+        printf("The tokens are: %s \n", tokens[i]);
+        i++;
+    }
     
 }
 
@@ -47,24 +55,24 @@ char* readLine(void){
         }
 }
 
-// char** parse(char* line){
-//     int bufSize = TOKEN_SIZE;
-//     int position = 0;
-//     char** tokens = malloc(sizeof(char*) * bufSize);
-//     char* token;
+char** parseLine(char* line){
+    int bufSize = TOKEN_SIZE;
+    int position = 0;
+    char** tokens = malloc(sizeof(char*) * bufSize);
+    char* token;
 
-//     token = strok(line, TOKEN_DELIM);
-//     while(token != NULL){
-//         tokens[position] = token;
-//         position++;
-//         if(position >= bufSize){
-//             bufSize += TOKEN_SIZE;
-//             tokens = realloc(tokens, bufSize * sizeof(char*));
-//         }
-//         token = strtok(NULL, TOKEN_DELIM);
-//     }
-//     tokens[position] = NULL;
-//     return tokens;
-// }
+    token = strtok(line, TOKEN_DELIM);
+    while(token != NULL){
+        tokens[position] = token;
+        position++;
+        if(position >= bufSize){
+            bufSize += TOKEN_SIZE;
+            tokens = realloc(tokens, bufSize * sizeof(char*));
+        }
+        token = strtok(NULL, TOKEN_DELIM);
+    }
+    tokens[position] = NULL;
+    return tokens;
+}
 
 
